@@ -4,6 +4,7 @@ mistakeTag = document.querySelector(".mistake");
 timeTag = document.querySelector(".time span b");
 wpmTag = document.querySelector(".wpm span");
 cpmTag = document.querySelector(".cpm span");
+tryAgainBtn = document.querySelector("button");
 
 let timer,
   maxTime = 60,
@@ -15,6 +16,9 @@ let isTyping = false;
 
 function randomParagraph() {
   let randIndex = Math.floor(Math.random() * paragraphs.length);
+
+  typingText.innerHTML = "";
+
   paragraphs[randIndex].split("").forEach((char) => {
     let spanTag = `<span>${char}</span>`;
     typingText.innerHTML += spanTag;
@@ -89,3 +93,16 @@ initTimer = () => {
 randomParagraph();
 
 inpField.addEventListener("input", initTyping);
+tryAgainBtn.addEventListener("click", () => {
+  clearInterval(timer);
+  timeLeft = maxTime;
+  timeTag.innerText = timeLeft;
+  inpField.disabled = false;
+  inpField.value = "";
+  charIndex = 0;
+  mistakes = 0;
+  cpmTag.innerText = 0;
+  isTyping = false;
+  typingText.innerHTML = "";
+  randomParagraph();
+});
