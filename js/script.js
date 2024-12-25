@@ -23,6 +23,7 @@ function randomParagraph() {
     let spanTag = `<span>${char}</span>`;
     typingText.innerHTML += spanTag;
   });
+  typingText.querySelectorAll("span")[0].classList.add("active");
   document.addEventListener("keydown", () => inpField.focus());
   typingText.addEventListener("click", () => inpField.focus());
 }
@@ -91,8 +92,8 @@ initTimer = () => {
 };
 
 randomParagraph();
-
 inpField.addEventListener("input", initTyping);
+
 tryAgainBtn.addEventListener("click", () => {
   clearInterval(timer);
   timeLeft = maxTime;
